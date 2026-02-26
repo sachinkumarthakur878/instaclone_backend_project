@@ -8,11 +8,11 @@ const followSchema = new mongoose.Schema({
     followee: { 
         type: String,
     },
-    // status: {
-    //     type: String,
-    //     enum: ["pending", "accepted", "rejected"],
-    //     default: "pending"
-    // }
+    status: {
+        type: String,
+        enum: ["pending", "accepted", "rejected"],
+        default: "pending"
+    }
 
 }, { 
     timestamps: true
