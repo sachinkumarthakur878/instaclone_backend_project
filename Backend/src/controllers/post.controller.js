@@ -36,7 +36,6 @@ async function createPostController(req, res) {
 
 
 }
-
 async function getPostController(req, res) { 
   
 
@@ -53,7 +52,6 @@ async function getPostController(req, res) {
         })
      
 }
-
 async function getPostDetailsController(req, res) { 
     
 
@@ -83,8 +81,6 @@ async function getPostDetailsController(req, res) {
             post
         })
 }
-
-
 async function likePostController(req, res) { 
     const username = req.user.username
     const postId = req.params.postId
