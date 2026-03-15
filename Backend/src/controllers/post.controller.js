@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken")
 const likeModel = require("../model/like.model")
 
 
+
 const imageKit = new ImageKit({
     privateKey: process.env.IMAGEKIT_PRIVATE_KEY,
 })
@@ -104,11 +105,23 @@ async function likePostController(req, res) {
             like
     })
 
+    
 }
+
+async function getFeedController(req, res) {
+        const posts = await postModel.find().populate("user")
+
+        res.status(200).json({ 
+            message: "Posts fetched successfully",
+            posts
+        })
+        
+    }
 
 module.exports = {
     createPostController,
     getPostController,
     getPostDetailsController,
-    likePostController
+    likePostController,
+    getFeedController
 }

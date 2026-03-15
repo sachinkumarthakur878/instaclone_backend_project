@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
+
+$black: #000000;
+$white: #ffffff;
+$font:  'Nunito', sans-serif;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  background: $black;
+  font-family: $font;
+}
+
+// ── feed-page — scroll container ──────────────────────────────────────────
+.feed-page {
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  background: #111;
+
+  // center everything horizontally
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
+}
+
+// ── .feed — one reel slot, full screen height ──────────────────────────────
+.feed {
+  width: 100%;
+  height: 100vh;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  flex-shrink: 0;
+
+  // center the card vertically inside each reel slot
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;        // gap upar aur niche
+}
+
+// ── .posts — card wrapper with fixed width & rounded corners ──────────────
+.posts {
+  width: 380px;           // card width — Instagram style
+  height: calc(100vh - 40px);   // full height minus top+bottom padding
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.7);
+}
+
+// ── .post — fills card, image behind + UI on top ───────────────────────────
+.post {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: $black;
+  border-radius: 16px;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(
+      to bottom,
+      rgba(0,0,0,0.45) 0%,
+      transparent      20%,
+      transparent      55%,
+      rgba(0,0,0,0.85) 100%
+    );
+  }
+}
+
+// ── .video — fills entire card ─────────────────────────────────────────────
+.video {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+}
+
+// ── .user — avatar + username top-left ────────────────────────────────────
+.user {
+  position: absolute;
+  top: 16px;
+  left: 14px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  img {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid $white;
+    flex-shrink: 0;
+  }
+
+  p {
+    font-size: 14px;
+    font-weight: 700;
+    color: $white;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.7);
+  }
+}
+
+// ── .buttom — caption bottom-left ─────────────────────────────────────────
+.buttom {
+  position: absolute;
+  bottom: 24px;
+  left: 14px;
+  right: 14px;
+  z-index: 2;
+
+  .caption {
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.92);
+    line-height: 1.5;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.7);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+// ── Mobile — full width on small screens ──────────────────────────────────
+@media (max-width: 500px) {
+  .feed {
+    padding: 12px 0;
+  }
+
+  .posts {
+    width: 92vw;
+    height: calc(100vh - 24px);
+    border-radius: 12px;
+  }
+}
